@@ -2,7 +2,8 @@ package com.vanessa.library2;
 
 import java.util.Scanner;
 
-import com.vanessa.library2.dao.AlunoDAO;
+import com.vanessa.library2.dao.BookDAO;
+import com.vanessa.library2.dao.StudentDAO;
 import com.vanessa.library2.exceptions.LivroException;
 
 public class Main {
@@ -10,11 +11,14 @@ public class Main {
 
 	public static void main(String[] args) throws LivroException {
 
-		AlunoDAO.addAlunos();
-
+		StudentDAO.insertStudents();
+		BookDAO.insertBooks();
+		BookDAO.getBooks();
+		
 		while (true) {
+			
 			menu();
-			// int escolha = t.nextInt();
+			int choice = t.nextInt();
 
 		}
 
