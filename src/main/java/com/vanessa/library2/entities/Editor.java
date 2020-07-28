@@ -9,7 +9,7 @@ public class Editor {
 		return this;
 	}
 	
-	public Editor specialtyOf(String specialty) {
+	public Editor specialty(String specialty) {
 		this.specialty = specialty;
 		return this;
 	}

@@ -21,9 +21,9 @@ public class StudentDAO {
 		Grade ninth = new Grade().educationalStage("Ninth grade");
 
 		students.add(new Student().named("Maria").bornIn("20/07/2013").enrolledIn(first));
-		students.add(new Student().named("Maria").bornIn("25/12/2011").enrolledIn(third));
-		students.add(new Student().named("Maria").bornIn("04/02/2006").enrolledIn(eighth));
-		students.add(new Student().named("Maria").bornIn("15/10/2007").enrolledIn(seventh));
+		students.add(new Student().named("Gustavo").bornIn("25/12/2011").enrolledIn(third));
+		students.add(new Student().named("Felipe").bornIn("04/02/2006").enrolledIn(eighth));
+		students.add(new Student().named("Pedro").bornIn("15/10/2007").enrolledIn(seventh));
 		students.add(new Student().named("Marcia").bornIn("05/05/2009").enrolledIn(fifth));
 		students.add(new Student().named("João").bornIn("01/01/2005").enrolledIn(ninth));
 		students.add(new Student().named("José").bornIn("09/05/2008").enrolledIn(sixth));
@@ -47,4 +47,11 @@ public class StudentDAO {
 			System.out.println(student);
 		}
 	}
+
+	public static List<Student> getStudentsList() {
+		return students;
+	}
+	
+	
+	
 }

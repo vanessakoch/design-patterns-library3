@@ -16,14 +16,14 @@ public class BookDAO {
 		Edition two = new Edition().numbered(2);
 		Edition three = new Edition().numbered(3);
 		
-		Editor abc = new Editor().named("ABC Editora").specialtyOf("Matemática");
-		Editor az = new Editor().named("AZ Editora").specialtyOf("Português");
+		Editor abc = new Editor().named("ABC Editora").specialty("Matemática");
+		Editor az = new Editor().named("AZ Editora").specialty("Português");
 		
-		books.add(new Book().named("Cálculo I").editedBy(abc).editionNumber(one).publicationYear(1900));
-		books.add(new Book().named("Cálculo II").editedBy(abc).editionNumber(two).publicationYear(1900));
-		books.add(new Book().named("Português I").editedBy(az).editionNumber(one).publicationYear(1999));
-		books.add(new Book().named("Português II").editedBy(az).editionNumber(two).publicationYear(2002));
-		books.add(new Book().named("Português III").editedBy(az).editionNumber(three).publicationYear(2005));
+		books.add(new Book().named("CálculoI").edited(abc).editionNumber(one).published(1900).copies(2));
+		books.add(new Book().named("CálculoII").edited(abc).editionNumber(two).published(1900).copies(4));
+		books.add(new Book().named("Português I").edited(az).editionNumber(one).published(1999).copies(1));
+		books.add(new Book().named("Português II").edited(az).editionNumber(two).published(2002).copies(5));
+		books.add(new Book().named("Português III").edited(az).editionNumber(three).published(2005).copies(3));
 		
 	}
 
