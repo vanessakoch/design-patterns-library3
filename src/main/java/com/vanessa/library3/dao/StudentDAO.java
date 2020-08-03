@@ -1,10 +1,10 @@
-package com.vanessa.library2.dao;
+package com.vanessa.library3.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vanessa.library2.entities.Grade;
-import com.vanessa.library2.entities.Student;
+import com.vanessa.library3.entities.Grade;
+import com.vanessa.library3.entities.Student;
 
 public class StudentDAO {
 	public static List<Student> students = new ArrayList<Student>();

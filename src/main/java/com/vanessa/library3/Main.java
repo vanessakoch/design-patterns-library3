@@ -1,24 +1,23 @@
-package com.vanessa.library2;
+package com.vanessa.library3;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.vanessa.library2.controller.BorrowCommand;
-import com.vanessa.library2.controller.DevolutionCommand;
-import com.vanessa.library2.controller.Invoker;
-import com.vanessa.library2.controller.ReserveCommand;
-import com.vanessa.library2.dao.BookDAO;
-import com.vanessa.library2.dao.StudentDAO;
-import com.vanessa.library2.entities.Book;
-import com.vanessa.library2.entities.Student;
-import com.vanessa.library2.exceptions.LivroException;
+import com.vanessa.library3.controller.BorrowCommand;
+import com.vanessa.library3.controller.DevolutionCommand;
+import com.vanessa.library3.controller.Invoker;
+import com.vanessa.library3.controller.ReserveCommand;
+import com.vanessa.library3.dao.BookDAO;
+import com.vanessa.library3.dao.StudentDAO;
+import com.vanessa.library3.entities.Book;
+import com.vanessa.library3.entities.Student;
 
 public class Main {
 	static Scanner t = new Scanner(System.in);
 	static List<String> questionList;
 
-	public static void main(String[] args) throws LivroException {
+	public static void main(String[] args) {
 
 		StudentDAO.insertStudents();
 		BookDAO.insertBooks();
@@ -96,10 +95,18 @@ public class Main {
 				String studentName = getStudentName();
 				boolean studentExists = false;
 
+				System.out.println("[1] - Empréstimos | [2] - Reservas");
+				int action = t.nextInt();
+				
 				for (Student student : StudentDAO.getStudentsList()) {
 					if (studentName.equalsIgnoreCase(student.getName())) {
-						student.printBorrowedBooks();
 						studentExists = true;
+						System.out.println(student.getName() + ": \n");
+						if(action == 1) {
+							student.printBorrowedBooks();
+						} else {
+							student.printReservedBooks();
+						}
 					}
 				}
 
@@ -109,18 +116,7 @@ public class Main {
 				break;
 
 			case 6:
-				String name = getStudentName();
-				boolean exist = false;
-
-				for (Student student : StudentDAO.getStudentsList()) {
-					if (name.equalsIgnoreCase(student.getName())) {
-						student.printReservedBooks();
-						exist = true;
-					}
-				}
-
-				if (!exist)
-					System.out.println("Aluno não existe!");
+				
 
 				break;
 			}
@@ -134,8 +130,8 @@ public class Main {
 		System.out.println("[2] - Emprestar livro");
 		System.out.println("[3] - Devolver livro");
 		System.out.println("[4] - Reservar livro");
-		System.out.println("[5] - Pesquisar empréstimos");
-		System.out.println("[6] - Pesquisar reservas\n");
+		System.out.println("[5] - Pesquisar ações do aluno");
+		System.out.println("[6] - Gerenciar compras para o acervo");
 	}
 
 	public static List<String> getStudentnBook() {
@@ -143,7 +139,6 @@ public class Main {
 
 		System.out.println("Digite o nome do aluno: ");
 		questionList.add(t.next());
-
 		System.out.println("Digite o nome do livro: ");
 		questionList.add(t.next());
 
@@ -154,7 +149,7 @@ public class Main {
 	}
 
 	public static int getConfirmation() {
-		System.out.println("1 - Confirmar | 2 - Desfazer");
+		System.out.println("[1] - Confirmar | [2] - Desfazer");
 		return t.nextInt();
 	}
 

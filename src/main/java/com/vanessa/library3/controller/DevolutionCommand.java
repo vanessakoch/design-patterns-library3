@@ -1,7 +1,7 @@
-package com.vanessa.library2.controller;
+package com.vanessa.library3.controller;
 
-import com.vanessa.library2.entities.Book;
-import com.vanessa.library2.entities.Student;
+import com.vanessa.library3.entities.Book;
+import com.vanessa.library3.entities.Student;
 
 public class DevolutionCommand implements Command {
 	private String document;

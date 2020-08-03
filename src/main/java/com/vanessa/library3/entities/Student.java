@@ -1,4 +1,4 @@
-package com.vanessa.library2.entities;
+package com.vanessa.library3.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +38,6 @@ public class Student {
 		return grade;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [name=" + name + ", birthDate=" + birthDate + ", grade=" + grade + "]";
-	}
-
 	public List<Book> getBorrowedBooks() {
 		return borrowedBooks;
 	}
@@ -61,5 +56,10 @@ public class Student {
 		for(Book book : reservedBooks) {
 			System.out.println(book);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", birthDate=" + birthDate + ", grade=" + grade + "]";
 	}
 }

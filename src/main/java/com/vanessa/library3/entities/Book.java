@@ -1,4 +1,4 @@
-package com.vanessa.library2.entities;
+package com.vanessa.library3.entities;
 
 public class Book {
 	private String name;

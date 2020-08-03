@@ -1,11 +1,11 @@
-package com.vanessa.library2.dao;
+package com.vanessa.library3.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vanessa.library2.entities.Book;
-import com.vanessa.library2.entities.Edition;
-import com.vanessa.library2.entities.Editor;
+import com.vanessa.library3.entities.Book;
+import com.vanessa.library3.entities.Edition;
+import com.vanessa.library3.entities.Editor;
 
 public class BookDAO {
 	public static List<Book> books = new ArrayList<Book>();
