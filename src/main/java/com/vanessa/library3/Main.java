@@ -1,7 +1,5 @@
 package com.vanessa.library3;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.vanessa.library3.controller.BorrowCommand;
@@ -10,12 +8,16 @@ import com.vanessa.library3.controller.Invoker;
 import com.vanessa.library3.controller.ReserveCommand;
 import com.vanessa.library3.dao.BookDAO;
 import com.vanessa.library3.dao.StudentDAO;
+import com.vanessa.library3.entities.Agenda;
 import com.vanessa.library3.entities.Book;
+import com.vanessa.library3.entities.DigitalMeet;
+import com.vanessa.library3.entities.Meeting;
+import com.vanessa.library3.entities.RoomMeet;
 import com.vanessa.library3.entities.Student;
 
 public class Main {
 	static Scanner t = new Scanner(System.in);
-	static List<String> questionList;
+	static String answers[];
 
 	public static void main(String[] args) {
 
@@ -38,8 +40,8 @@ public class Main {
 
 			case 2:
 				if (getStudentnBook() != null) {
-					register = invoker.execute(new BorrowCommand(register, StudentDAO.getStudent(questionList.get(0)),
-							BookDAO.getBook(questionList.get(1))));
+					register = invoker.execute(new BorrowCommand(register, StudentDAO.getStudent(answers[0]),
+							BookDAO.getBook(answers[1])));
 
 					if (getConfirmation() == 2) {
 						register = invoker.undo();
@@ -54,8 +56,8 @@ public class Main {
 
 			case 3:
 				if (getStudentnBook() != null) {
-					Student student = StudentDAO.getStudent(questionList.get(0));
-					Book book = BookDAO.getBook(questionList.get(1));
+					Student student = StudentDAO.getStudent(answers[0]);
+					Book book = BookDAO.getBook(answers[1]);
 					boolean isRented = false;
 
 					for (Book books : student.getBorrowedBooks()) {
@@ -79,8 +81,8 @@ public class Main {
 
 			case 4:
 				if (getStudentnBook() != null) {
-					register = invoker.execute(new ReserveCommand(register, StudentDAO.getStudent(questionList.get(0)),
-							BookDAO.getBook(questionList.get(1))));
+					register = invoker.execute(new ReserveCommand(register, StudentDAO.getStudent(answers[0]),
+							BookDAO.getBook(answers[1])));
 
 					if (getConfirmation() == 2) {
 						register = invoker.undo();
@@ -116,8 +118,15 @@ public class Main {
 				break;
 
 			case 6:
+				Meeting dig = new DigitalMeet(50, 5, 5);
+				Meeting room = new RoomMeet(100, 5, 1, 1);
 				
-
+				Agenda agenda = new Agenda();
+				agenda.insertMeet(dig);
+				agenda.insertMeet(room);
+				
+				System.out.println(agenda.getTotal());
+				
 				break;
 			}
 
@@ -131,19 +140,19 @@ public class Main {
 		System.out.println("[3] - Devolver livro");
 		System.out.println("[4] - Reservar livro");
 		System.out.println("[5] - Pesquisar ações do aluno");
-		System.out.println("[6] - Gerenciar compras para o acervo");
+		System.out.println("[6] - Agendar reunião\n");
 	}
 
-	public static List<String> getStudentnBook() {
-		questionList = new ArrayList<String>();
+	public static String[] getStudentnBook() {
+		answers = new String[2];
 
 		System.out.println("Digite o nome do aluno: ");
-		questionList.add(t.next());
+		answers[0] = t.next();
 		System.out.println("Digite o nome do livro: ");
-		questionList.add(t.next());
+		answers[1] = t.next();
 
-		if (StudentDAO.getStudent(questionList.get(0)) != null && BookDAO.getBook(questionList.get(1)) != null) {
-			return questionList;
+		if (StudentDAO.getStudent(answers[0]) != null && BookDAO.getBook(answers[1]) != null) {
+			return answers;
 		}
 		return null;
 	}
