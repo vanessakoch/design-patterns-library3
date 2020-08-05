@@ -1,5 +1,7 @@
 package com.vanessa.library3;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.vanessa.library3.controller.BorrowCommand;
@@ -28,7 +30,6 @@ public class Main {
 		Invoker invoker = new Invoker();
 
 		while (true) {
-
 			menu();
 			int choice = t.nextInt();
 
@@ -118,20 +119,51 @@ public class Main {
 				break;
 
 			case 6:
-				Meeting dig = new DigitalMeet(50, 5, 5);
-				Meeting room = new RoomMeet(100, 5, 1, 1);
-				
+				List<Meeting> meetings = new ArrayList<Meeting>();
 				Agenda agenda = new Agenda();
-				agenda.insertMeet(dig);
-				agenda.insertMeet(room);
 				
-				System.out.println(agenda.getTotal());
+				int reserve = 1;
 				
+				while(reserve != 0) {
+					System.out.println("\n[1] - Nova ocupação de computadores");
+					System.out.println("[2] - Nova ocupação de salas");
+					System.out.println("[0] - Fechar agenda");
+					reserve = t.nextInt();	
+					
+					if(reserve == 1) {
+						System.out.println("Digite o número de alunos: ");
+						int n_students = t.nextInt();
+						System.out.println("Digite o tempo de duração (minutos): ");
+						int time = t.nextInt();
+						System.out.println("Digite o número de computadores: ");
+						int n_cpu = t.nextInt();
+						meetings.add(new DigitalMeet(time, n_students, n_cpu));
+					}
+					
+					if(reserve == 2) {
+						System.out.println("Digite o número de alunos: ");
+						int n_students = t.nextInt();
+						System.out.println("Digite o tempo de duração (minutos): ");
+						int time = t.nextInt();
+						System.out.println("Digite o número de salas: ");
+						int n_rooms = t.nextInt();
+						System.out.println("Digite o número de professores: ");
+						int n_teachers = t.nextInt();
+						meetings.add(new RoomMeet(time, n_students, n_teachers, n_rooms));
+					}		
+				}
+				
+				if(reserve == 0) {
+					for(Meeting meet : meetings) {
+						agenda.insertMeet(meet);
+					}
+					
+					System.out.println(agenda.getTotal());	
+					meetings.clear();
+				}
 				break;
 			}
-
 		}
-
 	}
 
 	public static void menu() {
