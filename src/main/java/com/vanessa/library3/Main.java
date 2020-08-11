@@ -1,7 +1,5 @@
 package com.vanessa.library3;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.vanessa.library3.controller.BorrowCommand;
@@ -9,11 +7,12 @@ import com.vanessa.library3.controller.DevolutionCommand;
 import com.vanessa.library3.controller.Invoker;
 import com.vanessa.library3.controller.ReserveCommand;
 import com.vanessa.library3.dao.BookDAO;
+import com.vanessa.library3.dao.ComputerDAO;
 import com.vanessa.library3.dao.StudentDAO;
 import com.vanessa.library3.entities.Agenda;
 import com.vanessa.library3.entities.Book;
 import com.vanessa.library3.entities.DigitalMeet;
-import com.vanessa.library3.entities.Meeting;
+import com.vanessa.library3.entities.Library;
 import com.vanessa.library3.entities.RoomMeet;
 import com.vanessa.library3.entities.Student;
 
@@ -23,9 +22,12 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		Library library = new Library(5000.0);
+
 		StudentDAO.insertStudents();
 		BookDAO.insertBooks();
-
+		ComputerDAO.insertComputers();
+		
 		String register = "";
 		Invoker invoker = new Invoker();
 
@@ -100,12 +102,12 @@ public class Main {
 
 				System.out.println("[1] - Empréstimos | [2] - Reservas");
 				int action = t.nextInt();
-				
+
 				for (Student student : StudentDAO.getStudentsList()) {
 					if (studentName.equalsIgnoreCase(student.getName())) {
 						studentExists = true;
 						System.out.println(student.getName() + ": \n");
-						if(action == 1) {
+						if (action == 1) {
 							student.printBorrowedBooks();
 						} else {
 							student.printReservedBooks();
@@ -119,28 +121,34 @@ public class Main {
 				break;
 
 			case 6:
-				List<Meeting> meetings = new ArrayList<Meeting>();
 				Agenda agenda = new Agenda();
-				
+
 				int reserve = 1;
-				
-				while(reserve != 0) {
+
+				while (reserve != 0) {
 					System.out.println("\n[1] - Nova ocupação de computadores");
-					System.out.println("[2] - Nova ocupação de salas");
+;					System.out.println("[2] - Nova ocupação de salas");
 					System.out.println("[0] - Fechar agenda");
-					reserve = t.nextInt();	
-					
-					if(reserve == 1) {
+					reserve = t.nextInt();
+
+					if (reserve == 1) {
 						System.out.println("Digite o número de alunos: ");
 						int n_students = t.nextInt();
 						System.out.println("Digite o tempo de duração (minutos): ");
 						int time = t.nextInt();
 						System.out.println("Digite o número de computadores: ");
 						int n_cpu = t.nextInt();
-						meetings.add(new DigitalMeet(time, n_students, n_cpu));
+						if(n_cpu <= ComputerDAO.computers.size()) {
+							DigitalMeet digital = new DigitalMeet(time, n_students, n_cpu);
+							agenda.insertMeet(digital);
+							System.out.println("Reservado.");
+						} else {
+							System.out.println("Computadores insuficientes.");
+						}
+						
 					}
-					
-					if(reserve == 2) {
+
+					if (reserve == 2) {
 						System.out.println("Digite o número de alunos: ");
 						int n_students = t.nextInt();
 						System.out.println("Digite o tempo de duração (minutos): ");
@@ -149,18 +157,38 @@ public class Main {
 						int n_rooms = t.nextInt();
 						System.out.println("Digite o número de professores: ");
 						int n_teachers = t.nextInt();
-						meetings.add(new RoomMeet(time, n_students, n_teachers, n_rooms));
-					}		
-				}
-				
-				if(reserve == 0) {
-					for(Meeting meet : meetings) {
-						agenda.insertMeet(meet);
+						RoomMeet room = new RoomMeet(time, n_students, n_teachers, n_rooms);
+						agenda.insertMeet(room);
+						System.out.println("Reservado.");
 					}
-					
-					System.out.println(agenda.getTotal());	
-					meetings.clear();
 				}
+
+				if (reserve == 0)
+					System.out.println(agenda.getTotal());
+
+				break;
+
+			case 7:
+				System.out.println("[1] - Comprar livro | [2] - Comprar computador | "
+						+ "[3] - Manutenção de livro | [4] - Manutenção de computador");
+				int shop = t.nextInt();
+
+				switch (shop) {
+				case 1:
+					library.shopBook();
+					break;
+				case 2:
+					library.shopComputer();
+					break;
+				case 3:
+					library.maintenanceBook();
+					break;
+				case 4:
+					library.maintenanceComputer();
+					break;
+				}
+				System.out.println("Saldo atual: " + library.getYield());
+
 				break;
 			}
 		}
@@ -172,7 +200,8 @@ public class Main {
 		System.out.println("[3] - Devolver livro");
 		System.out.println("[4] - Reservar livro");
 		System.out.println("[5] - Pesquisar ações do aluno");
-		System.out.println("[6] - Agendar reunião\n");
+		System.out.println("[6] - Agendar reunião");
+		System.out.println("[7] - Gerenciar biblioteca\n");
 	}
 
 	public static String[] getStudentnBook() {

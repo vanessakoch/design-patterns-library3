@@ -38,7 +38,7 @@ public class Agenda {
 		duration += getProperties().get(MeetProperties.DURATION);
 
 		return "Agenda: \nEstá sendo usado " + total_computers + " computadores e " + total_rooms + " sala(s) por " + total_students
-				+ " aluno(s) e " + total_teachers + " professor(es). Duração de uso total de " + duration + " minutos.";
+				+ " aluno(s) e " + total_teachers + " professor(es). Tempo total de uso: " + duration + " minutos.";
 	}
 
 	private List<Meeting> getMeetings() {

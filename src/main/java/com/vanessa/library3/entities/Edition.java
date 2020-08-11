@@ -12,4 +12,9 @@ public class Edition {
 	public String toString() {
 		return "" + number + "]";
 	}
+
+	public int getNumber() {
+		return number;
+	}
+	
 }

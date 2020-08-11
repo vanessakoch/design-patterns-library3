@@ -18,5 +18,13 @@ public class Editor {
 	public String toString() {
 		return "Editor [name=" + name + ", specialty=" + specialty + "]";
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getSpecialty() {
+		return specialty;
+	}
 	
 }
