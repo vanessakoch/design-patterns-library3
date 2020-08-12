@@ -1,7 +1,7 @@
-package com.vanessa.library3.controller;
+package com.vanessa.library3.command_pattern;
 
-import com.vanessa.library3.entities.Book;
-import com.vanessa.library3.entities.Student;
+import com.vanessa.library3.facade.Book;
+import com.vanessa.library3.fluent_interfaces.Student;
 
 public class ReserveCommand implements Command {
 	private String document;

@@ -1,4 +1,4 @@
-package com.vanessa.library3.entities;
+package com.vanessa.library3.facade;
 
 public class Library {
 	private double yield;

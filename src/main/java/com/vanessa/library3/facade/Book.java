@@ -1,8 +1,10 @@
-package com.vanessa.library3.entities;
+package com.vanessa.library3.facade;
 
 import java.util.Scanner;
 
-import com.vanessa.library3.dao.BookDAO;
+import com.vanessa.library3.fluent_interfaces.BookDAO;
+import com.vanessa.library3.fluent_interfaces.Edition;
+import com.vanessa.library3.fluent_interfaces.Editor;
 
 public class Book implements Management {
 	static Scanner t = new Scanner(System.in);

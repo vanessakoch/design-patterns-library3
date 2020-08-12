@@ -2,22 +2,30 @@ package com.vanessa.library3;
 
 import java.util.Scanner;
 
-import com.vanessa.library3.controller.BorrowCommand;
-import com.vanessa.library3.controller.DevolutionCommand;
-import com.vanessa.library3.controller.Invoker;
-import com.vanessa.library3.controller.ReserveCommand;
-import com.vanessa.library3.dao.BookDAO;
-import com.vanessa.library3.dao.ComputerDAO;
-import com.vanessa.library3.dao.StudentDAO;
-import com.vanessa.library3.entities.Agenda;
-import com.vanessa.library3.entities.Book;
-import com.vanessa.library3.entities.DigitalMeet;
-import com.vanessa.library3.entities.Library;
-import com.vanessa.library3.entities.RoomMeet;
-import com.vanessa.library3.entities.Student;
+import com.vanessa.library3.command_pattern.BorrowCommand;
+import com.vanessa.library3.command_pattern.DevolutionCommand;
+import com.vanessa.library3.command_pattern.Invoker;
+import com.vanessa.library3.command_pattern.ReserveCommand;
+import com.vanessa.library3.double_dispatch.Agenda;
+import com.vanessa.library3.double_dispatch.DigitalMeet;
+import com.vanessa.library3.double_dispatch.RoomMeet;
+import com.vanessa.library3.facade.Book;
+import com.vanessa.library3.facade.Library;
+import com.vanessa.library3.fluent_interfaces.BookDAO;
+import com.vanessa.library3.fluent_interfaces.ComputerDAO;
+import com.vanessa.library3.fluent_interfaces.Student;
+import com.vanessa.library3.fluent_interfaces.StudentDAO;
+import com.vanessa.library3.flyweight.DocFactory;
+import com.vanessa.library3.flyweight.DocFactory.Type;
+import com.vanessa.library3.flyweight.Document;
+import com.vanessa.library3.flyweight.Documentary;
+import com.vanessa.library3.flyweight.FinalExam;
+import com.vanessa.library3.flyweight.Thesis;
 
 public class Main {
 	static Scanner t = new Scanner(System.in);
+	static Scanner space = new Scanner(System.in);
+	
 	static String answers[];
 
 	public static void main(String[] args) {
@@ -27,7 +35,7 @@ public class Main {
 		StudentDAO.insertStudents();
 		BookDAO.insertBooks();
 		ComputerDAO.insertComputers();
-		
+
 		String register = "";
 		Invoker invoker = new Invoker();
 
@@ -127,7 +135,7 @@ public class Main {
 
 				while (reserve != 0) {
 					System.out.println("\n[1] - Nova ocupação de computadores");
-;					System.out.println("[2] - Nova ocupação de salas");
+					System.out.println("[2] - Nova ocupação de salas");
 					System.out.println("[0] - Fechar agenda");
 					reserve = t.nextInt();
 
@@ -138,14 +146,14 @@ public class Main {
 						int time = t.nextInt();
 						System.out.println("Digite o número de computadores: ");
 						int n_cpu = t.nextInt();
-						if(n_cpu <= ComputerDAO.computers.size()) {
+						if (n_cpu <= ComputerDAO.computers.size()) {
 							DigitalMeet digital = new DigitalMeet(time, n_students, n_cpu);
 							agenda.insertMeet(digital);
 							System.out.println("Reservado.");
 						} else {
 							System.out.println("Computadores insuficientes.");
 						}
-						
+
 					}
 
 					if (reserve == 2) {
@@ -190,6 +198,40 @@ public class Main {
 				System.out.println("Saldo atual: " + library.getYield());
 
 				break;
+
+			case 8:
+				DocFactory factory = new DocFactory();
+
+				System.out.println("[1] - Trabalho de conclusão de curso");
+				System.out.println("[2] - Tese/Dissertações");
+				System.out.println("[3] - Documentário");
+				int select = t.nextInt();
+				System.out.println("Digite o título do documento: ");
+				String titulo = space.nextLine();
+
+				switch (select) {
+				case 1:
+					Document finalExam = factory.getDocument(Type.FINALEXAM, titulo);
+					if (finalExam != null)
+						finalExam.getDocument();
+
+					break;
+				case 2:
+					Document thesis = factory.getDocument(Type.THESIS, titulo);
+					if (thesis != null)
+						thesis.getDocument();
+
+					break;
+				case 3:
+					Document documentary = factory.getDocument(Type.DOCUMENTARY, titulo);
+					if (documentary != null)
+						documentary.getDocument();
+					break;
+				default:
+					break;
+				}
+
+				break;
 			}
 		}
 	}
@@ -201,7 +243,8 @@ public class Main {
 		System.out.println("[4] - Reservar livro");
 		System.out.println("[5] - Pesquisar ações do aluno");
 		System.out.println("[6] - Agendar reunião");
-		System.out.println("[7] - Gerenciar biblioteca\n");
+		System.out.println("[7] - Gerenciar biblioteca");
+		System.out.println("[8] - Buscar documentos\n");
 	}
 
 	public static String[] getStudentnBook() {

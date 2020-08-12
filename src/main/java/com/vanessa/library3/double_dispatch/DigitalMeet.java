@@ -1,4 +1,4 @@
-package com.vanessa.library3.entities;
+package com.vanessa.library3.double_dispatch;
 
 import com.vanessa.library3.util.MeetProperties;
 

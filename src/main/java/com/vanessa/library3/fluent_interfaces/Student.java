@@ -1,7 +1,9 @@
-package com.vanessa.library3.entities;
+package com.vanessa.library3.fluent_interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.vanessa.library3.facade.Book;
 
 public class Student {
 

@@ -1,10 +1,7 @@
-package com.vanessa.library3.dao;
+package com.vanessa.library3.fluent_interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.vanessa.library3.entities.Grade;
-import com.vanessa.library3.entities.Student;
 
 public class StudentDAO {
 	public static List<Student> students = new ArrayList<Student>();

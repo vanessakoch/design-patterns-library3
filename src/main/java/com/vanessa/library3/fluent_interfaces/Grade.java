@@ -1,4 +1,4 @@
-package com.vanessa.library3.entities;
+package com.vanessa.library3.fluent_interfaces;
 
 public class Grade {
 	private String stage;

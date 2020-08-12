@@ -1,11 +1,9 @@
-package com.vanessa.library3.dao;
+package com.vanessa.library3.fluent_interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vanessa.library3.entities.Book;
-import com.vanessa.library3.entities.Edition;
-import com.vanessa.library3.entities.Editor;
+import com.vanessa.library3.facade.Book;
 
 public class BookDAO {
 	public static List<Book> books = new ArrayList<Book>();

@@ -1,8 +1,8 @@
-package com.vanessa.library3.entities;
+package com.vanessa.library3.facade;
 
 import java.util.Scanner;
 
-import com.vanessa.library3.dao.ComputerDAO;
+import com.vanessa.library3.fluent_interfaces.ComputerDAO;
 
 public class Computer implements Management {
 	Scanner t = new Scanner(System.in);

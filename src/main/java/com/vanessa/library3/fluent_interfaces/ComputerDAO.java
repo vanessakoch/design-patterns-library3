@@ -1,9 +1,9 @@
-package com.vanessa.library3.dao;
+package com.vanessa.library3.fluent_interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vanessa.library3.entities.Computer;
+import com.vanessa.library3.facade.Computer;
 
 public class ComputerDAO {
 	public static List<Computer> computers = new ArrayList<Computer>();
