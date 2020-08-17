@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vanessa.library3.util.MeetProperties;
-
 public class Agenda {
 	private Map<MeetProperties, Integer> properties;
 	private List<Meeting> meetings;
@@ -23,7 +21,7 @@ public class Agenda {
 
 	public String getTotal() {
 		if (meetings.isEmpty())
-			return "Sem reuniões no momento!";
+			return "Sem encontros de estudo no momento!";
 
 		int total_computers = 0;
 		int total_rooms = 0;

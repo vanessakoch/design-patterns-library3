@@ -21,7 +21,7 @@ public class BorrowCommand implements Command {
 		
 		student.getBorrowedBooks().add(book);
 		book.copies(book.getTotal() - 1);
-		return document.concat("\nLivro " + book.getName() + " foi alugado por " + student.getName());
+		return document.concat("\nO livro " + book.getName() + " foi emprestado por " + student.getName());
 	}
 
 	public String undo() {

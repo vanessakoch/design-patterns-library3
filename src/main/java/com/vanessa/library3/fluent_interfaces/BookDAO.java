@@ -20,16 +20,15 @@ public class BookDAO {
 		editors.add(abc);
 		editors.add(az);
 
-		books.add(new Book().named("CálculoI").edited(abc).editionNumber(one).published(1900).copies(2));
-		books.add(new Book().named("CálculoII").edited(abc).editionNumber(two).published(1900).copies(4));
-		books.add(new Book().named("PortuguesI").edited(az).editionNumber(one).published(1999).copies(1));
-		books.add(new Book().named("PortuguesII").edited(az).editionNumber(two).published(2002).copies(5));
-		books.add(new Book().named("PortuguesIII").edited(az).editionNumber(three).published(2005).copies(3));
+		books.add(new Book().named("Calculo I").edited(abc).editionNumber(one).published(1900).copies(2));
+		books.add(new Book().named("Calculo II").edited(abc).editionNumber(two).published(1900).copies(4));
+		books.add(new Book().named("Portugues I").edited(az).editionNumber(one).published(1999).copies(1));
+		books.add(new Book().named("Portugues II").edited(az).editionNumber(two).published(2002).copies(5));
+		books.add(new Book().named("Portugues III").edited(az).editionNumber(three).published(2005).copies(3));
 	}
 
 	public static void newBook(String book_name, int book_year, int copies, String editor, int edition) {
 		Edition edition_number = new Edition().numbered(edition);
-
 		books.add(new Book().named(book_name).edited(getEditor(editor)).editionNumber(edition_number)
 				.published(book_year).copies(copies));
 		System.out.println("Compra realizada com sucesso!");
@@ -43,7 +42,7 @@ public class BookDAO {
 		return null;
 	}
 
-	public static void getBooks() {
+	public static void printBooks() {
 		for (Book book : books) {
 			System.out.println(book);
 		}

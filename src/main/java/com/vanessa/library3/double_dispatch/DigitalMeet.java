@@ -1,7 +1,5 @@
 package com.vanessa.library3.double_dispatch;
 
-import com.vanessa.library3.util.MeetProperties;
-
 public class DigitalMeet extends Meeting {
 	private int numberComputers;
 

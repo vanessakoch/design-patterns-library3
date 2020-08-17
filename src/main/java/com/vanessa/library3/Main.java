@@ -18,14 +18,11 @@ import com.vanessa.library3.fluent_interfaces.StudentDAO;
 import com.vanessa.library3.flyweight.DocFactory;
 import com.vanessa.library3.flyweight.DocFactory.Type;
 import com.vanessa.library3.flyweight.Document;
-import com.vanessa.library3.flyweight.Documentary;
-import com.vanessa.library3.flyweight.FinalExam;
-import com.vanessa.library3.flyweight.Thesis;
 
 public class Main {
 	static Scanner t = new Scanner(System.in);
 	static Scanner space = new Scanner(System.in);
-	
+
 	static String answers[];
 
 	public static void main(String[] args) {
@@ -46,7 +43,7 @@ public class Main {
 			switch (choice) {
 
 			case 1:
-				StudentDAO.getStudents();
+				StudentDAO.printStudents();
 				break;
 
 			case 2:
@@ -105,21 +102,16 @@ public class Main {
 				break;
 
 			case 5:
-				String studentName = getStudentName();
+				System.out.println("Digite o nome do aluno: ");
+				String studentName = space.nextLine();
 				boolean studentExists = false;
-
-				System.out.println("[1] - Empréstimos | [2] - Reservas");
-				int action = t.nextInt();
 
 				for (Student student : StudentDAO.getStudentsList()) {
 					if (studentName.equalsIgnoreCase(student.getName())) {
 						studentExists = true;
-						System.out.println(student.getName() + ": \n");
-						if (action == 1) {
-							student.printBorrowedBooks();
-						} else {
-							student.printReservedBooks();
-						}
+						System.out.println("Registros do(a) aluno(a) " + student.getName() + "\n");
+						student.printBorrowedBooks();
+						student.printReservedBooks();
 					}
 				}
 
@@ -146,6 +138,7 @@ public class Main {
 						int time = t.nextInt();
 						System.out.println("Digite o número de computadores: ");
 						int n_cpu = t.nextInt();
+
 						if (n_cpu <= ComputerDAO.computers.size()) {
 							DigitalMeet digital = new DigitalMeet(time, n_students, n_cpu);
 							agenda.insertMeet(digital);
@@ -210,23 +203,23 @@ public class Main {
 				String titulo = space.nextLine();
 
 				switch (select) {
+
 				case 1:
 					Document finalExam = factory.getDocument(Type.FINALEXAM, titulo);
 					if (finalExam != null)
 						finalExam.getDocument();
-
 					break;
 				case 2:
 					Document thesis = factory.getDocument(Type.THESIS, titulo);
 					if (thesis != null)
 						thesis.getDocument();
-
 					break;
 				case 3:
 					Document documentary = factory.getDocument(Type.DOCUMENTARY, titulo);
 					if (documentary != null)
 						documentary.getDocument();
 					break;
+
 				default:
 					break;
 				}
@@ -242,7 +235,7 @@ public class Main {
 		System.out.println("[3] - Devolver livro");
 		System.out.println("[4] - Reservar livro");
 		System.out.println("[5] - Pesquisar ações do aluno");
-		System.out.println("[6] - Agendar reunião");
+		System.out.println("[6] - Agendar espaço para estudo");
 		System.out.println("[7] - Gerenciar biblioteca");
 		System.out.println("[8] - Buscar documentos\n");
 	}
@@ -251,9 +244,9 @@ public class Main {
 		answers = new String[2];
 
 		System.out.println("Digite o nome do aluno: ");
-		answers[0] = t.next();
+		answers[0] = space.nextLine();
 		System.out.println("Digite o nome do livro: ");
-		answers[1] = t.next();
+		answers[1] = space.nextLine();
 
 		if (StudentDAO.getStudent(answers[0]) != null && BookDAO.getBook(answers[1]) != null) {
 			return answers;
@@ -266,8 +259,4 @@ public class Main {
 		return t.nextInt();
 	}
 
-	public static String getStudentName() {
-		System.out.println("Digite o nome do aluno: ");
-		return t.next();
-	}
 }

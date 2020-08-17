@@ -2,8 +2,6 @@ package com.vanessa.library3.double_dispatch;
 
 import java.util.Calendar;
 
-import com.vanessa.library3.util.MeetProperties;
-
 public abstract class Meeting {
 	private int hour;
 	private int minute;

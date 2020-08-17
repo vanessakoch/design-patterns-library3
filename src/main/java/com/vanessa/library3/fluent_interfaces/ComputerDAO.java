@@ -27,7 +27,7 @@ public class ComputerDAO {
 		return null;
 	}
 	
-	public static void getComputers() {
+	public static void printComputers() {
 		for(Computer computer : computers) {
 			System.out.println(computer);
 		}

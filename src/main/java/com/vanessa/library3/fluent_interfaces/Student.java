@@ -49,12 +49,18 @@ public class Student {
 	}
 	
 	public void printBorrowedBooks() {
+		System.out.println("Empréstimos:");
+		if (borrowedBooks.size() == 0)
+			System.out.println("Nenhum empréstimo ainda.");
 		for(Book book : borrowedBooks) {
 			System.out.println(book);
 		}
 	}
 	
 	public void printReservedBooks() {
+		System.out.println("\nReservas:");
+		if (reservedBooks.size() == 0)
+			System.out.println("Nenhuma reserva ainda.");
 		for(Book book : reservedBooks) {
 			System.out.println(book);
 		}

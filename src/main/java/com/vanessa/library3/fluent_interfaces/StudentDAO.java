@@ -39,7 +39,7 @@ public class StudentDAO {
 		return null;
 	}
 	
-	public static void getStudents() {
+	public static void printStudents() {
 		for(Student student : students) {
 			System.out.println(student);
 		}
